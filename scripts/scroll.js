@@ -1,47 +1,30 @@
-const links = document.querySelectorAll('.header-menu__item a')
-seamless.polyfill();
+const scrollFunc = () => {
+    const links = document.querySelectorAll('.header-menu__item a')
+    const details = document.querySelector('.card-details__link-characteristics')
+    const newArray = [...links, details]
+    seamless.polyfill();
 
-links.forEach((element) => {
-    element.addEventListener('click', (event) => {
-        event.preventDefault()
-        
-        const id = element.getAttribute('href').substring(1)
-        const section = document.getElementById(id)
-        
-        if (section) {
-            seamless.elementScrollIntoView( section, {
-                behavior: 'smooth',
-                block: 'start'
-            })
-        } else {
-            seamless.elementScrollIntoView(document.querySelector("#characteristics"), {
-                behavior: "smooth",
-                block: "center",
-                inline: "center",
-            });
-        }
-    })
-});
+    newArray.forEach((element) => {
+        element.addEventListener('click', (event) => {
+            event.preventDefault()
 
-const details = document.querySelector('.card-details__link-characteristics')
-console.log(details)
+            const id = element.getAttribute('href').substring(1)
+            const section = document.getElementById(id)
 
-details.addEventListener('click', (event) => {
-    event.preventDefault()
-
-    const id =details.getAttribute('href').substring(1)
-    const section = document.getElementById(id)
-
-    if (section) {
-        seamless.elementScrollIntoView( section, {
-            behavior: 'smooth',
-            block: 'start'
+            if (section) {
+                seamless.elementScrollIntoView(section, {
+                    behavior: 'smooth',
+                    block: 'start'
+                })
+            } else {
+                seamless.elementScrollIntoView(document.querySelector("#characteristics"), {
+                    behavior: "smooth",
+                    block: "center",
+                    inline: "center",
+                });
+            }
         })
-    } else {
-        seamless.elementScrollIntoView(document.querySelector("#characteristics"), {
-            behavior: "smooth",
-            block: "center",
-            inline: "center",
-        });
-    }
-})
+    });
+}
+
+scrollFunc()
